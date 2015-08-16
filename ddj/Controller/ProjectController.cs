@@ -34,7 +34,7 @@ namespace MDM.Controller
             };
             Put["/{id}", true] = async (_, t) =>
             {
-                return await projects.UpdateOneAsync(Builders<ProjectModel>.Filter.Eq("_id", new ObjectId(_.id.Value as string)), Builders<ProjectModel>.Update.Set("name", this.Bind<ProjectModel>().name));
+                return await projects.UpdateOneAsync(Builders<ProjectModel>.Filter.Eq("_id", new ObjectId(_.id.Value as string)), Builders<ProjectModel>.Update.Set("name", this.Bind<ProjectModel>().name).Set("designs", this.Bind<ProjectModel>().designs));
             };
             Delete["/{id}", true] = async (_, t) =>
             {
