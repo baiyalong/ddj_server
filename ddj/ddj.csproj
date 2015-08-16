@@ -102,6 +102,7 @@
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Model\Base.cs" />
+    <Compile Include="Model\DesignModel.cs" />
     <Compile Include="Model\ProjectModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

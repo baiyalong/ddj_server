@@ -19,11 +19,11 @@ namespace MDM.Controller
 
             Get["/", true] = async (_, t) =>
             {
-                return await users.Find(new BsonDocument()).ToListAsync();
+                return await users.Find(new BsonDocument()).Project<UserModel>(Builders<UserModel>.Projection.Exclude("password")).ToListAsync();
             };
             Get["/{id}", true] = async (_, t) =>
             {
-                return await users.Find(Builders<UserModel>.Filter.Eq("_id", new ObjectId(_.id.Value as string))).FirstOrDefaultAsync();
+                return await users.Find(Builders<UserModel>.Filter.Eq("_id", new ObjectId(_.id.Value as string))).Project<UserModel>(Builders<UserModel>.Projection.Exclude("password")).FirstOrDefaultAsync();
             };
             Post["/", true] = async (_, t) =>
             {

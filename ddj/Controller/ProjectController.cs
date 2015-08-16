@@ -19,7 +19,7 @@ namespace MDM.Controller
 
             Get["/", true] = async (_, t) =>
             {
-                return await projects.Find(new BsonDocument()).ToListAsync();
+                return await projects.Find(new BsonDocument()).Project<ProjectModel>(Builders<ProjectModel>.Projection.Exclude("designs")).ToListAsync();
             };
             Get["/{id}", true] = async (_, t) =>
             {
