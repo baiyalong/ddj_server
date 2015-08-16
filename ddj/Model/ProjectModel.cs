@@ -13,6 +13,6 @@ namespace MDM.Model
         public DateTime createTime { get; set; }
         public string userName { get; set; }
 
-        public IEnumerable<string> designs { get; set; }
+        public IEnumerable<DesignModel> designs { get; set; }
     }
 }

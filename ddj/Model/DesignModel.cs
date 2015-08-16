@@ -9,7 +9,8 @@ namespace MDM.Model
 {
     public class DesignModel
     {
-        public string title { get; set; }
-        public string content { get; set; }
+        public string id { get; set; }
+        public string type { get; set; }
+        public string data { get; set; }
     }
 }
