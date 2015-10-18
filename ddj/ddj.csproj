@@ -93,9 +93,18 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DLL\IMDbEcStatorCal2.dll" />
+    <Content Include="DLL\IMEmEcSteadCal2.dll" />
+    <Content Include="DLL\IMEmEcTransCal2.dll" />
+    <Content Include="DLL\IMEmSzTransCal2.dll" />
+    <Content Include="DLL\IMEmSzTransMesh2.dll" />
+    <Content Include="DLL\IMMeEcStatorCal2.dll" />
+    <Content Include="DLL\IMMeSzStatorCal2.dll" />
+    <Content Include="DLL\IMPredictFr2.dll" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\DLLController.cs" />
     <Compile Include="Controller\LoginController.cs" />
     <Compile Include="Controller\ProjectController.cs" />
     <Compile Include="Bootstrapper.cs" />
@@ -103,12 +112,21 @@
     <Compile Include="Database.cs" />
     <Compile Include="Model\Base.cs" />
     <Compile Include="Model\DesignModel.cs" />
+    <Compile Include="Model\IMDbEcStatorCal2Model.cs" />
     <Compile Include="Model\ProjectModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="DLL.h\IMDbEcStatorCal2.h" />
+    <Content Include="DLL.h\IMEmEcSteadCal2.h" />
+    <Content Include="DLL.h\IMEmEcTransCal2.h" />
+    <Content Include="DLL.h\IMEmSzTransCal2.h" />
+    <Content Include="DLL.h\IMEmSzTransMesh2.h" />
+    <Content Include="DLL.h\IMMeEcStatorCal2.h" />
+    <Content Include="DLL.h\IMMeSzStatorCal2.h" />
+    <Content Include="DLL.h\IMPredictFr2.h" />
     <None Include="Properties\PublishProfiles\8080.pubxml" />
     <None Include="Properties\PublishProfiles\ddj.pubxml" />
     <None Include="Web.Debug.config">
