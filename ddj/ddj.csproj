@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\DLLController.cs" />
+    <Compile Include="Model\IMPredictFr2Model.cs" />
     <Compile Include="Controller\LoginController.cs" />
     <Compile Include="Controller\ProjectController.cs" />
     <Compile Include="Bootstrapper.cs" />

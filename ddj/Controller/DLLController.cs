@@ -130,12 +130,19 @@ namespace MDM.Controller
 
             Post["/IMPredictFr2", true] = async (_, t) =>
             {
+                var model = this.Bind<IMPredictFr2Model>();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(model.user);
+                sb.AppendLine(model.project);
+                sb.AppendLine(model.design);
+                sb.AppendLine(model.timestamp.ToString());
                 await Task.Run(() =>
                 {
-                    IMPredictFrMainCal(1, 1, 1, 1, 1, 1, "", CallbackFun);
-                    System.Diagnostics.Debug.WriteLine("-----the end----------------");
+                    sb.AppendLine("begin------------------------------");
+                    IMPredictFrMainCal(model.P, model.Q1, model.Q2, model.N_r, model.F, model.Frmax, "", (s) => sb.AppendLine(s));
+                    sb.AppendLine("end--------------------------------");
                 });
-                return 200;
+                return sb.ToString();
             };
 
         }
