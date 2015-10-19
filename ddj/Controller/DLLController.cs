@@ -46,30 +46,41 @@ namespace MDM.Controller
 
             Post["/IMEmEcSteadCal2", true] = async (_, t) =>
             {
-                double a = 0, b = 0;
-                await Task.Run(() => IMEmEcSteadCalMain("", "", 1, 1, 1,
-                1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1,
-                1, 1,
-                1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1,
-                1, 1, 1, 1,
-                1, 1, 1, 1, ref a,
-                1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1,
-                1, 1,
-                1, 1, 1, 1, ref b,
-                1, 1,
-                1, 1, 1, 1, 1,
-                1,
-                1, 1, 1, 1, 1, CallbackFun
-                ));
-                return 200;
+                var model = this.Bind<IMEmEcSteadCal2Model>();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(model.user);
+                sb.AppendLine(model.project);
+                sb.AppendLine(model.design);
+                sb.AppendLine(model.timestamp.ToString());
+                await Task.Run(() =>
+                {
+                    sb.AppendLine("begin------------------------------");
+                    //            IMEmEcSteadCalMain("","",
+                    //                            model.FlagEMType0_, model.M_, model.P_,
+                    //model.D1_, model.DI1_, model.SCL_, model.Q1_, model.NK1_,
+                    //model.BK1_, model.Kfes_, model.IKRS_, model.SSlotType_, model.BS0_,
+                    //model.BS1_, model.BS2_, model.HS0_, model.HS1_, model.HS2_,
+                    //model.a_El_, model.b_El_,
+                    //model.JC_, model.swlay_, model.A1_, model.Y1_, model.Z1_,
+                    //model.CLZ1_, model.Srv_, model.SCoilType_, model.N1_, model.Dsci_,
+                    //model.A1S_, model.B1S_, model.AA1_, model.LL_,
+                    //model.Flag_SPhaseSequ_, model.clockwise_stator_, model.SCShape_, model.SWCType_, model.SWCFinArray_,
+                    //model.DO2_, model.DI2_, model.RCL_, model.Q2_, model.NK2_,
+                    //model.BK2_, model.BSK_, model.Kfer_, model.IKRR_, model.RSlotType_,
+                    //model.BR0_, model.BR1_, model.BR2_, model.BR3_, model.BR4_,
+                    //model.HR0_, model.HR1_, model.HR2_, model.Es_, model.Ed_,
+                    //model.JCR_, model.rwlay_, model.A2_, model.Y2_, model.Z2_,
+                    //model.CLZ2_, model.Rrv_, model.RCoilType_, model.NR_, model.Drci_,
+                    //model.A2R_, model.B2R_,
+                    //model.Flag_RPhaseSequ_, model.clockwise_rotor_, model.RCShape_, model.RWCType_, model.RWCFinArray_,
+                    //model.Flag_ROutlet_, model.Flag2KindWaveWinding_,
+                    //model.CLB_, model.DR_, model.Be_, model.He_, model.rob_,
+                    //model.roe_,
+                    //model.U_, model.F_, model.Slip_, model.Fordermax_, model.HarmCalType,
+                    //        (s) => sb.AppendLine(s));
+                    sb.AppendLine("end--------------------------------");
+                });
+                return sb.ToString();
             };
 
             Post["/IMEmEcTransCal2", true] = async (_, t) =>
@@ -107,16 +118,58 @@ namespace MDM.Controller
 
             Post["/IMEmSzTransMesh2", true] = async (_, t) =>
             {
-                await Task.Run(() => IMPredictFrMainCal(1, 1, 1, 1, 1, 1, "", CallbackFun));
-                return 200;
+                var model = this.Bind<IMEmSzTransMesh2Model>();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(model.user);
+                sb.AppendLine(model.project);
+                sb.AppendLine(model.design);
+                sb.AppendLine(model.timestamp.ToString());
+                await Task.Run(() =>
+                {
+                    double[] a = model.SToothRi;
+                    sb.AppendLine("begin------------------------------");
+                    //IMEmSzTransMeshMain("",
+                    //        model.D1, model.DI1, model.Q1, model.SSlotType,
+                    //        model.HS0, model.HS1, model.HS2, model.BS0, model.BS1, model.BS2,
+                    //        model.swlay, model.USPW, model.DETAG1, model.DO2,
+                    //        model.CalcuMult, model.dSLiner, model.dSWedgeDw, model.dSLineBot,
+                    //        model.FlagSToothRi, model.SToothRiRow, ref a,
+                    //        model.ElemNumPerSArc, model.SmrtSizeStator, model.FlagSToothAddSlot,
+                    //        model.SToothAddSlotWidth, model.SToothAddSlotHigth,
+                    //        model.FlagEMType0, model.DI2, model.Q2,
+                    //        model.RSlotType, model.HR0, model.HR1, model.HR2,
+                    //        model.BR0, model.BR1, model.BR2, model.BR3, model.BR4,
+                    //        model.rwlay, model.URPW, model.DETAG2,
+                    //        model.FlagAngleRSlot, model.AngleRSlotRow, model.AngleRSlot,
+                    //        model.SmrtSizeRotor,
+                    //        (s) => sb.AppendLine(s));
+                    sb.AppendLine("end--------------------------------");
+                });
+                return sb.ToString();
             };
 
             Post["/IMMeEcStatorCal2", true] = async (_, t) =>
             {
-                await Task.Run(() => IMMeEcStatorCalMain(
-                    "", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-               CallbackFun));
-                return 200;
+                var model = this.Bind<IMMeEcStatorCal2Model>();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(model.user);
+                sb.AppendLine(model.project);
+                sb.AppendLine(model.design);
+                sb.AppendLine(model.timestamp.ToString());
+                await Task.Run(() =>
+                {
+                    sb.AppendLine("begin------------------------------");
+                    IMMeEcStatorCalMain("",
+                            model.P, model.DI1, model.D1, model.SCL, model.Q1,
+                            model.NK1, model.BK1, model.Kfes, model.SSlotType, model.BS0,
+                            model.BS1, model.BS2, model.HS0, model.HS1, model.HS2,
+                            model.swlay, model.Z1, model.A1S, model.B1S, model.N1,
+                            model.CLZ1, model.OrdeMax, model.Ordefr0, model.Freqfr0, model.Amplfr0,
+                            model.FlagCal,
+                            (s) => sb.AppendLine(s));
+                    sb.AppendLine("end--------------------------------");
+                });
+                return sb.ToString();
             };
 
             Post["/IMMeSzStatorCal2", true] = async (_, t) =>

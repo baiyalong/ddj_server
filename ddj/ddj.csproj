@@ -105,6 +105,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\DLLController.cs" />
+    <Compile Include="Model\IMEmSzTransMesh2Model.cs" />
+    <Compile Include="Model\IMMeEcStatorCal2Model.cs" />
+    <Compile Include="Model\IMMeSzStatorCal2Model.cs" />
+    <Compile Include="Model\IMEmEcSteadCal2Model.cs" />
     <Compile Include="Model\IMPredictFr2Model.cs" />
     <Compile Include="Controller\LoginController.cs" />
     <Compile Include="Controller\ProjectController.cs" />
