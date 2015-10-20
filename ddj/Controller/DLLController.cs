@@ -126,23 +126,22 @@ namespace MDM.Controller
                 sb.AppendLine(model.timestamp.ToString());
                 await Task.Run(() =>
                 {
-                    double[] a = model.SToothRi;
                     sb.AppendLine("begin------------------------------");
-                    //IMEmSzTransMeshMain("",
-                    //        model.D1, model.DI1, model.Q1, model.SSlotType,
-                    //        model.HS0, model.HS1, model.HS2, model.BS0, model.BS1, model.BS2,
-                    //        model.swlay, model.USPW, model.DETAG1, model.DO2,
-                    //        model.CalcuMult, model.dSLiner, model.dSWedgeDw, model.dSLineBot,
-                    //        model.FlagSToothRi, model.SToothRiRow, ref a,
-                    //        model.ElemNumPerSArc, model.SmrtSizeStator, model.FlagSToothAddSlot,
-                    //        model.SToothAddSlotWidth, model.SToothAddSlotHigth,
-                    //        model.FlagEMType0, model.DI2, model.Q2,
-                    //        model.RSlotType, model.HR0, model.HR1, model.HR2,
-                    //        model.BR0, model.BR1, model.BR2, model.BR3, model.BR4,
-                    //        model.rwlay, model.URPW, model.DETAG2,
-                    //        model.FlagAngleRSlot, model.AngleRSlotRow, model.AngleRSlot,
-                    //        model.SmrtSizeRotor,
-                    //        (s) => sb.AppendLine(s));
+                    IMEmSzTransMeshMain("",
+                            model.D1, model.DI1, model.Q1, model.SSlotType,
+                            model.HS0, model.HS1, model.HS2, model.BS0, model.BS1, model.BS2,
+                            model.swlay, model.USPW, model.DETAG1, model.DO2,
+                            model.CalcuMult, model.dSLiner, model.dSWedgeDw, model.dSLineBot,
+                            model.FlagSToothRi, model.SToothRiRow, model.SToothRi,
+                            model.ElemNumPerSArc, model.SmrtSizeStator, model.FlagSToothAddSlot,
+                            model.SToothAddSlotWidth, model.SToothAddSlotHigth,
+                            model.FlagEMType0, model.DI2, model.Q2,
+                            model.RSlotType, model.HR0, model.HR1, model.HR2,
+                            model.BR0, model.BR1, model.BR2, model.BR3, model.BR4,
+                            model.rwlay, model.URPW, model.DETAG2,
+                            model.FlagAngleRSlot, model.AngleRSlotRow, model.AngleRSlot,
+                            model.SmrtSizeRotor,
+                            (s) => sb.AppendLine(s));
                     sb.AppendLine("end--------------------------------");
                 });
                 return sb.ToString();
@@ -233,7 +232,7 @@ namespace MDM.Controller
                 int JC_, int swlay_, int A1_, int Y1_, int Z1_,
                 double CLZ1_, double Srv_, int SCoilType_, int N1_, double Dsci_,
                 double A1S_, double B1S_, double AA1_, double LL_,
-                int Flag_SPhaseSequ_, int clockwise_stator_, int SCShape_, int SWCType_, ref double SWCFinArray_,
+                int Flag_SPhaseSequ_, int clockwise_stator_, int SCShape_, int SWCType_, double[,] SWCFinArray_,
                 double DO2_, double DI2_, double RCL_, int Q2_, int NK2_,
                 double BK2_, double BSK_, double Kfer_, int IKRR_, int RSlotType_,
                 double BR0_, double BR1_, double BR2_, double BR3_, double BR4_,
@@ -241,7 +240,7 @@ namespace MDM.Controller
                 int JCR_, int rwlay_, int A2_, int Y2_, int Z2_,
                 double CLZ2_, double Rrv_, int RCoilType_, int NR_, double Drci_,
                 double A2R_, double B2R_,
-                int Flag_RPhaseSequ_, int clockwise_rotor_, int RCShape_, int RWCType_, ref double RWCFinArray_,
+                int Flag_RPhaseSequ_, int clockwise_rotor_, int RCShape_, int RWCType_, double[,] RWCFinArray_,
                 int Flag_ROutlet_, int Flag2KindWaveWinding_,
                 double CLB_, double DR_, double Be_, double He_, double rob_,
                 double roe_,
@@ -257,7 +256,7 @@ namespace MDM.Controller
                 int JC_, int swlay_, int A1_, int Y1_, int Z1_,
                 double CLZ1_, double Srv_, int SCoilType_, double Dsci_,
                 double A1S_, double B1S_, int N1_, double AA1_, double LL_,
-                int Flag_SPhaseSequ_, int clockwise_stator_, int SCShape_, int SWCType_, ref double SWCFinArray_,
+                int Flag_SPhaseSequ_, int clockwise_stator_, int SCShape_, int SWCType_, double SWCFinArray_,
                 double DO2_, double DI2_, double RCL_, int Q2_, int NK2_,
                 double BK2_, double BSK_, double Kfer_, int IKRR_, int RSlotType_,
                 double BR0_, double BR1_, double BR2_, double BR3_, double BR4_,
@@ -265,9 +264,9 @@ namespace MDM.Controller
                 double CLB_, double DR_, double Be_, double He_, double rob_,
                 double roe_,
                 double WKKS_, double PFWP_, double WindLoss_, double ReferSpeed_,
-                int FlagRMove_, int RunFlag0_, int RunFlag2_, int RunNums_, ref double RunX_,
-                ref double RunY_, double SimTotalTime_, double step_, double Precision_, double InitAnglPos_,
-                double InitNr_, int Flag_Us_line_, int N_Us_line_, ref double Time_Us_line_, ref double Us_line_,
+                int FlagRMove_, int RunFlag0_, int RunFlag2_, int RunNums_, double[] RunX_,
+                double[] RunY_, double SimTotalTime_, double step_, double Precision_, double InitAnglPos_,
+                double InitNr_, int Flag_Us_line_, int N_Us_line_, double[] Time_Us_line_, double[,] Us_line_,
                 int FlagSteadyEstimate_, double ErrorSteadyEstimate_, Callback cb);
 
         [DllImport("../DLL/IMEmSzTransCal2.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, EntryPoint = "IMEmSzTransCalMain")]
@@ -282,7 +281,7 @@ namespace MDM.Controller
                 double CLZ1, double Srv, int SCoilType, int N1, double Dsci,
                 double A1S, double B1S, double AA1, double LL, double DETAG1,
                 double USPW,
-                int Flag_SPhaseSequ, int clockwise_stator, int SCShape, int SWCType, ref double SWCFinArray,
+                int Flag_SPhaseSequ, int clockwise_stator, int SCShape, int SWCType, double[,] SWCFinArray,
                 double DO2, double DI2, double RCL, int Q2, int NK2,
                 double BK2, double BSK, double Kfer, int IKRR, int RSlotType,
                 double BR0, double BR1, double BR2, double BR3, double BR4,
@@ -291,13 +290,13 @@ namespace MDM.Controller
                 double CLZ2, double Rrv, int RCoilType, int NR, double Drci,
                 double A2R, double B2R, double DETAG2, double URPW, int Flag2KindWaveWinding,
                 int Flag_ROutlet, int Flag_RPhaseSequ, int clockwise_rotor, int RCShape, int RWCType,
-                ref double RWCFinArray,
+                double[,] RWCFinArray,
                 double CLB, double DR, double Be, double He, double rob,
                 double roe,
                 int CalcuMult, double WKKS, double PFWP, double WindLoss, double ReferSpeed,
-                int FlagRMove, int RunFlag0, int RunFlag2, int RunNums, ref double RunX,
-                ref double RunY, double SimTotalTime, double step, double RequiredPrecision, double InitAnglPos,
-                double InitNr, int Flag_Us_line, int N_Us_line, ref double Time_Us_line, ref double Us_line,
+                int FlagRMove, int RunFlag0, int RunFlag2, int RunNums, double[] RunX,
+                double[] RunY, double SimTotalTime, double step, double RequiredPrecision, double InitAnglPos,
+                double InitNr, int Flag_Us_line, int N_Us_line, double[] Time_Us_line, double[,] Us_line,
                 int Numb_AixalSimu, int FlagSteadyEstimate, double ErrorSteadyEstimate,
                 int Flag_Fourier, double InitTime_Fourier, int Flag_FourierMethod,
                 double Fourier_FreqMax, double Fourier_FreqResolution, int Flag_RedefineStep, int Flag_Fourier_2powN_FFT2,
@@ -307,20 +306,20 @@ namespace MDM.Controller
                 double drmax_rotatedNode_, double d_GapOuter_, int number_of_rotating_node_in_GapSeparateBar_,
                 int total_of_NODE_in_Rotor_all_, int total_of_fixedELEMENT_in_Rotor_,
                 int total_of_NODE_in_Stator_all_, int total_of_fixedELEMENT_in_Stator_,
-                ref int NodeNum_of_GapInner_, ref int NodeNum_of_GapOuter_, ref int ipoint_, ref int jpoint_, ref int kpoint_,
-                ref double area_of_ELEMENT_, ref int MatNumber_, ref int ElemTypeNumber_, ref double x_pos_, ref double y_pos_,
-                int total_of_rotatedNODEs_, ref int num_of_rotatedNODE_,
-                ref int total_of_NODEs_on_firstBoundaryLine_, ref int num_of_firstNODE_,
+                int[] NodeNum_of_GapInner_, int[] NodeNum_of_GapOuter_, int[] ipoint_, int[] jpoint_, int[] kpoint_,
+                double[] area_of_ELEMENT_, int[] MatNumber_, int[] ElemTypeNumber_, double[] x_pos_, double[] y_pos_,
+                int total_of_rotatedNODEs_, int[] num_of_rotatedNODE_,
+                int[] total_of_NODEs_on_firstBoundaryLine_, int[] num_of_firstNODE_,
                 int total_of_NODES_on_Border_Rotor_, int total_of_NODES_on_Border_Stator_,
-                ref int num_of_NODES_on_Border_Real_, ref int num_of_NODES_on_Border_Virtual_,
+                int[] num_of_NODES_on_Border_Real_, int[] num_of_NODES_on_Border_Virtual_,
 
                 double drmax_rotatedNode__, double d_GapOuter__, int number_of_rotating_node_in_GapSeparateBar__,
                 int total_of_NODE_in_Rotor__, int total_of_fixedELEMENT_in_Rotor__,
                 int total_of_NODE_in_Stator__, int total_of_fixedELEMENT_in_Stator__,
-                ref int NodeNum_of_GapInner__, ref int NodeNum_of_GapOuter__, ref int ipoint__, ref int jpoint__, ref int kpoint__,
-                ref double area_of_ELEMENT__, ref int MatNumber__, ref int ElemTypeNumber__, ref double x_pos__, ref double y_pos__,
-                int total_of_rotatedNODEs__, ref int num_of_rotatedNODE__,
-                ref int total_of_NODEs_on_firstBoundaryLine__, ref int num_of_firstNODE__);
+                int[] NodeNum_of_GapInner__, int[] NodeNum_of_GapOuter__, int[] ipoint__, int[] jpoint__, int[] kpoint__,
+                double[] area_of_ELEMENT__, int[] MatNumber__, int[] ElemTypeNumber__, double[] x_pos__, double[] y_pos__,
+                int total_of_rotatedNODEs__, int[] num_of_rotatedNODE__,
+                int[] total_of_NODEs_on_firstBoundaryLine__, int[] num_of_firstNODE__);
 
         [DllImport("../DLL/IMEmSzTransMesh2.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, EntryPoint = "IMEmSzTransMeshMain")]
         public static extern void IMEmSzTransMeshMain(
@@ -328,14 +327,14 @@ namespace MDM.Controller
                 double HS0, double HS1, double HS2, double BS0, double BS1, double BS2,
                 int swlay, double USPW, double DETAG1, double DO2,
                 int CalcuMult, double dSLiner, double dSWedgeDw, double dSLineBot,
-                int FlagSToothRi, int SToothRiRow, ref double SToothRi,
+                int FlagSToothRi, int SToothRiRow, double[] SToothRi,
                 int ElemNumPerSArc, int SmrtSizeStator, int FlagSToothAddSlot,
                 double SToothAddSlotWidth, double SToothAddSlotHigth,
                 int FlagEMType0, double DI2, int Q2,
                 int RSlotType, double HR0, double HR1, double HR2,
                 double BR0, double BR1, double BR2, double BR3, double BR4,
                 int rwlay, double URPW, double DETAG2,
-                int FlagAngleRSlot, int AngleRSlotRow, ref double AngleRSlot,
+                int FlagAngleRSlot, int AngleRSlotRow, double[] AngleRSlot,
                 int SmrtSizeRotor, Callback cb);
 
         [DllImport("../DLL/IMMeEcStatorCal2.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, EntryPoint = "IMMeEcStatorCalMain")]
@@ -357,11 +356,11 @@ namespace MDM.Controller
                 int SWireCol, double DETAG1, double dSConductor, double dSCoil,
                 double dSLiner, double dSLiner2, double dSWedgeDw, double dSLineBot,
                 int MechCalCont, int MechStrucSCore, int MechStrucSWinding,
-                int MechStrucSFrame, int SCSegNum, ref double Lsss, int STCElemNum,
+                int MechStrucSFrame, int SCSegNum, double[] Lsss, int STCElemNum,
                 double MASSw, int ModeMax, double FreqMin, double FreqMax,
                 double AngleF1stdot, double FrameEX, double FramePRXY, double FrameDENS,
                 int FrameSSIZE, double FrameESIZE, int FlagSCoreFrame, double DeltFC,
-                double Lsca, int NumFixDot, ref double FixDotXYZR, Callback cb);
+                double Lsca, int NumFixDot, double[] FixDotXYZR, Callback cb);
 
         [DllImport("../DLL/IMPredictFr2.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, EntryPoint = "IMPredictFrMainCal")]
         public static extern void IMPredictFrMainCal(

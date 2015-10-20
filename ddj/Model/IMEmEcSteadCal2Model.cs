@@ -78,7 +78,7 @@ namespace MDM.Model
         public int SWCType_ { get; set; }   //	定子绕组连接类型代码
                                             //	01) 显极接法时为1；
                                             //	02) 庶极接法时为2.
-        public double[][] SWCFinArray_ { get; set; }  //	定子线圈输入框存储矩阵
+        public double[,] SWCFinArray_ { get; set; }  //	定子线圈输入框存储矩阵
                                                       //	01) 共(Q*wlay/2)行，共4列
                                                       //		01.01)  第i行第j列元素对应于输入框中第i行第j列元素；
                                                       //	02) 每一行表示一个线圈
@@ -185,7 +185,7 @@ namespace MDM.Model
         public int RWCType_ { get; set; }   //	转子绕组连接类型代码
                                             //	01) 显极接法时为1；
                                             //	02) 庶极接法时为2.
-        public double[][] RWCFinArray_ { get; set; }  //	转子线圈输入框存储矩阵
+        public double[,] RWCFinArray_ { get; set; }  //	转子线圈输入框存储矩阵
                                                       //	01) 共(Q*wlay/2)行，共4列
                                                       //		01.01)  第i行第j列元素对应于输入框中第i行第j列元素；
                                                       //	02) 每一行表示一个线圈
