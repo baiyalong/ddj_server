@@ -36,13 +36,17 @@ namespace MDM.Model
                                         //	02) 双层绕组时为2；
         public int Z1 { get; set; } //定子绕组每槽导体数
                                     //	01) 每槽导体数是指有效导体数，即将并绕的股线看成一个根有效导体.
+        public int SCoilType;  //定子导线类型
+                               //	01) 扁导线为1；
+                               //	02) 圆导线为2. 
+        public int N1 { get; set; } //定子线圈并绕根数
+        public double Dsci;    //定子圆导线的裸线直径(mm)
         public double A1S { get; set; } //定子导线的裸线窄边尺寸(mm)
                                         //	01) 对成型绕组为裸线的窄边尺寸；
                                         //	02) 对散嵌绕组为裸线的直径；
         public double B1S { get; set; } //定子导线的裸线宽边尺寸(mm)
                                         //	01) 对成型绕组为裸线的宽边尺寸；
                                         //	02) 对散嵌绕组时为0；
-        public int N1 { get; set; } //定子线圈并绕根数
         public double CLZ1 { get; set; }    //定子线圈半匝长(mm)
         public int OrdeMax { get; set; }    //计算模态的最高阶次
         public int Ordefr0 { get; set; }    //力波阶次

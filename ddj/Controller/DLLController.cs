@@ -55,29 +55,29 @@ namespace MDM.Controller
                 await Task.Run(() =>
                 {
                     sb.AppendLine("begin------------------------------");
-                    //            IMEmEcSteadCalMain("","",
-                    //                            model.FlagEMType0_, model.M_, model.P_,
-                    //model.D1_, model.DI1_, model.SCL_, model.Q1_, model.NK1_,
-                    //model.BK1_, model.Kfes_, model.IKRS_, model.SSlotType_, model.BS0_,
-                    //model.BS1_, model.BS2_, model.HS0_, model.HS1_, model.HS2_,
-                    //model.a_El_, model.b_El_,
-                    //model.JC_, model.swlay_, model.A1_, model.Y1_, model.Z1_,
-                    //model.CLZ1_, model.Srv_, model.SCoilType_, model.N1_, model.Dsci_,
-                    //model.A1S_, model.B1S_, model.AA1_, model.LL_,
-                    //model.Flag_SPhaseSequ_, model.clockwise_stator_, model.SCShape_, model.SWCType_, model.SWCFinArray_,
-                    //model.DO2_, model.DI2_, model.RCL_, model.Q2_, model.NK2_,
-                    //model.BK2_, model.BSK_, model.Kfer_, model.IKRR_, model.RSlotType_,
-                    //model.BR0_, model.BR1_, model.BR2_, model.BR3_, model.BR4_,
-                    //model.HR0_, model.HR1_, model.HR2_, model.Es_, model.Ed_,
-                    //model.JCR_, model.rwlay_, model.A2_, model.Y2_, model.Z2_,
-                    //model.CLZ2_, model.Rrv_, model.RCoilType_, model.NR_, model.Drci_,
-                    //model.A2R_, model.B2R_,
-                    //model.Flag_RPhaseSequ_, model.clockwise_rotor_, model.RCShape_, model.RWCType_, model.RWCFinArray_,
-                    //model.Flag_ROutlet_, model.Flag2KindWaveWinding_,
-                    //model.CLB_, model.DR_, model.Be_, model.He_, model.rob_,
-                    //model.roe_,
-                    //model.U_, model.F_, model.Slip_, model.Fordermax_, model.HarmCalType,
-                    //        (s) => sb.AppendLine(s));
+                    IMEmEcSteadCalMain("", "",
+                            model.FlagEMType0_, model.M_, model.P_,
+                            model.D1_, model.DI1_, model.SCL_, model.Q1_, model.NK1_,
+                            model.BK1_, model.Kfes_, model.IKRS_, model.SSlotType_, model.BS0_,
+                            model.BS1_, model.BS2_, model.HS0_, model.HS1_, model.HS2_,
+                            model.a_El_, model.b_El_,
+                            model.JC_, model.swlay_, model.A1_, model.Y1_, model.Z1_,
+                            model.CLZ1_, model.Srv_, model.SCoilType_, model.N1_, model.Dsci_,
+                            model.A1S_, model.B1S_, model.AA1_, model.LL_,
+                            model.Flag_SPhaseSequ_, model.clockwise_stator_, model.SCShape_, model.SWCType_, model.SWCFinArray_,
+                            model.DO2_, model.DI2_, model.RCL_, model.Q2_, model.NK2_,
+                            model.BK2_, model.BSK_, model.Kfer_, model.IKRR_, model.RSlotType_,
+                            model.BR0_, model.BR1_, model.BR2_, model.BR3_, model.BR4_,
+                            model.HR0_, model.HR1_, model.HR2_, model.Es_, model.Ed_,
+                            model.JCR_, model.rwlay_, model.A2_, model.Y2_, model.Z2_,
+                            model.CLZ2_, model.Rrv_, model.RCoilType_, model.NR_, model.Drci_,
+                            model.A2R_, model.B2R_,
+                            model.Flag_RPhaseSequ_, model.clockwise_rotor_, model.RCShape_, model.RWCType_, model.RWCFinArray_,
+                            model.Flag_ROutlet_, model.Flag2KindWaveWinding_,
+                            model.CLB_, model.DR_, model.Be_, model.He_, model.rob_,
+                            model.roe_,
+                            model.U_, model.F_, model.Slip_, model.Fordermax_, model.HarmCalType,
+                            (s) => sb.AppendLine(s));
                     sb.AppendLine("end--------------------------------");
                 });
                 return sb.ToString();
@@ -85,35 +85,105 @@ namespace MDM.Controller
 
             Post["/IMEmEcTransCal2", true] = async (_, t) =>
             {
-                double a = 0, b = 0, c = 0, d = 0, e = 0;
-                //await Task.Run(() => IMEmEcTransCalMain(
-                //"", "", 1,
-                //1, 1, 1, 1,
-                //1, 1, 1, 1, 1,
-                //1, 1, 1, 1, 1,
-                //1, 1, 1, 1, 1,
-                //1, 1, 1, 1, 1,
-                //1, 1, 1, 1, 1,
-                //1, 1, 1, 1, 1,
-                //1, 1, 1, 1, ref a,
-                //1, 1, 1, 1, 1,
-                //1, 1, 1, 1, 1,
-                //1, 1, 1, 1, 1,
-                //1, 1, 1, 1, 1,
-                //1, 1, 1, 1, 1,
-                //1,
-                //1, 1, 1, 1,
-                //1, 1, 1, 1, ref b,
-                //ref c, 1, 1, 1, 1,
-                //1, 1, 1, ref d, ref e,
-                //1, 1, CallbackFun));
-                return 200;
+                var model = this.Bind<IMEmEcTransCal2Model>();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(model.user);
+                sb.AppendLine(model.project);
+                sb.AppendLine(model.design);
+                sb.AppendLine(model.timestamp.ToString());
+                await Task.Run(() =>
+                {
+                    sb.AppendLine("begin------------------------------");
+                    IMEmEcTransCalMain("", "", model.ContCalMethod,
+                            model.M_, model.P_, model.U_, model.F_,
+                            model.D1_, model.DI1_, model.SCL_, model.Q1_, model.NK1_,
+                            model.BK1_, model.Kfes_, model.IKRS_, model.SSlotType_, model.BS0_,
+                            model.BS1_, model.BS2_, model.HS0_, model.HS1_, model.HS2_,
+                            model.JC_, model.swlay_, model.A1_, model.Y1_, model.Z1_,
+                            model.CLZ1_, model.Srv_, model.SCoilType_, model.Dsci_,
+                            model.A1S_, model.B1S_, model.N1_, model.AA1_, model.LL_,
+                            model.Flag_SPhaseSequ_, model.clockwise_stator_, model.SCShape_, model.SWCType_, model.SWCFinArray_,
+                            model.DO2_, model.DI2_, model.RCL_, model.Q2_, model.NK2_,
+                            model.BK2_, model.BSK_, model.Kfer_, model.IKRR_, model.RSlotType_,
+                            model.BR0_, model.BR1_, model.BR2_, model.BR3_, model.BR4_,
+                            model.HR0_, model.HR1_, model.HR2_, model.Es_, model.Ed_,
+                            model.CLB_, model.DR_, model.Be_, model.He_, model.rob_,
+                            model.roe_,
+                            model.WKKS_, model.PFWP_, model.WindLoss_, model.ReferSpeed_,
+                            model.FlagRMove_, model.RunFlag0_, model.RunFlag2_, model.RunNums_, model.RunX_,
+                            model.RunY_, model.SimTotalTime_, model.step_, model.Precision_, model.InitAnglPos_,
+                            model.InitNr_, model.Flag_Us_line_, model.N_Us_line_, model.Time_Us_line_, model.Us_line_,
+                            model.FlagSteadyEstimate_, model.ErrorSteadyEstimate_,
+                            (s) => sb.AppendLine(s));
+                    sb.AppendLine("end--------------------------------");
+                });
+                return sb.ToString();
             };
 
             Post["/IMEmSzTransCal2", true] = async (_, t) =>
             {
-                await Task.Run(() => IMPredictFrMainCal(1, 1, 1, 1, 1, 1, "", CallbackFun));
-                return 200;
+                var model = this.Bind<IMEmSzTransCal2Model>();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(model.user);
+                sb.AppendLine(model.project);
+                sb.AppendLine(model.design);
+                sb.AppendLine(model.timestamp.ToString());
+                await Task.Run(() =>
+                {
+                    sb.AppendLine("begin------------------------------");
+                    IMEmSzTransCalMain("",
+                            model.FlagEMType0, model.M, model.P, model.U, model.F,
+                            model.D1, model.DI1, model.SCL, model.Q1, model.NK1,
+                            model.BK1, model.Kfes, model.IKRS, model.SSlotType, model.BS0,
+                            model.BS1, model.BS2, model.HS0, model.HS1, model.HS2,
+                            model.SCCONDUCTY,
+                            model.JC, model.swlay, model.A1, model.Y1, model.Z1,
+                            model.CLZ1, model.Srv, model.SCoilType, model.N1, model.Dsci,
+                            model.A1S, model.B1S, model.AA1, model.LL, model.DETAG1,
+                            model.USPW,
+                            model.Flag_SPhaseSequ, model.clockwise_stator, model.SCShape, model.SWCType, model.SWCFinArray,
+                            model.DO2, model.DI2, model.RCL, model.Q2, model.NK2,
+                            model.BK2, model.BSK, model.Kfer, model.IKRR, model.RSlotType,
+                            model.BR0, model.BR1, model.BR2, model.BR3, model.BR4,
+                            model.HR0, model.HR1, model.HR2, model.RCCONDUCTY,
+                            model.JCR, model.rwlay, model.A2, model.Y2, model.Z2,
+                            model.CLZ2, model.Rrv, model.RCoilType, model.NR, model.Drci,
+                            model.A2R, model.B2R, model.DETAG2, model.URPW, model.Flag2KindWaveWinding,
+                            model.Flag_ROutlet, model.Flag_RPhaseSequ, model.clockwise_rotor, model.RCShape, model.RWCType,
+                            model.RWCFinArray,
+                            model.CLB, model.DR, model.Be, model.He, model.rob,
+                            model.roe,
+                            model.CalcuMult, model.WKKS, model.PFWP, model.WindLoss, model.ReferSpeed,
+                            model.FlagRMove, model.RunFlag0, model.RunFlag2, model.RunNums, model.RunX,
+                            model.RunY, model.SimTotalTime, model.step, model.RequiredPrecision, model.InitAnglPos,
+                            model.InitNr, model.Flag_Us_line, model.N_Us_line, model.Time_Us_line, model.Us_line,
+                            model.Numb_AixalSimu, model.FlagSteadyEstimate, model.ErrorSteadyEstimate,
+                            model.Flag_Fourier, model.InitTime_Fourier, model.Flag_FourierMethod,
+                            model.Fourier_FreqMax, model.Fourier_FreqResolution, model.Flag_RedefineStep, model.Flag_Fourier_2powN_FFT2,
+                            model.Flag_AirB_Fourier, model.Fourier_AirB_ModeOrder, model.Fourier_AirB_AmplMin,
+                            model.Flag_AirF_Fourier, model.Fourier_AirF_ModeOrder, model.Fourier_AirF_AmplMin,
+
+                            model.drmax_rotatedNode_, model.d_GapOuter_, model.number_of_rotating_node_in_GapSeparateBar_,
+                            model.total_of_NODE_in_Rotor_all_, model.total_of_fixedELEMENT_in_Rotor_,
+                            model.total_of_NODE_in_Stator_all_, model.total_of_fixedELEMENT_in_Stator_,
+                            model.NodeNum_of_GapInner_, model.NodeNum_of_GapOuter_, model.ipoint_, model.jpoint_, model.kpoint_,
+                            model.area_of_ELEMENT_, model.MatNumber_, model.ElemTypeNumber_, model.x_pos_, model.y_pos_,
+                            model.total_of_rotatedNODEs_, model.num_of_rotatedNODE_,
+                            model.total_of_NODEs_on_firstBoundaryLine_, model.num_of_firstNODE_,
+                            model.total_of_NODES_on_Border_Rotor_, model.total_of_NODES_on_Border_Stator_,
+                            model.num_of_NODES_on_Border_Real_, model.num_of_NODES_on_Border_Virtual_,
+
+                            model.drmax_rotatedNode__, model.d_GapOuter__, model.number_of_rotating_node_in_GapSeparateBar__,
+                            model.total_of_NODE_in_Rotor__, model.total_of_fixedELEMENT_in_Rotor__,
+                            model.total_of_NODE_in_Stator__, model.total_of_fixedELEMENT_in_Stator__,
+                            model.NodeNum_of_GapInner__, model.NodeNum_of_GapOuter__, model.ipoint__, model.jpoint__, model.kpoint__,
+                            model.area_of_ELEMENT__, model.MatNumber__, model.ElemTypeNumber__, model.x_pos__, model.y_pos__,
+                            model.total_of_rotatedNODEs__, model.num_of_rotatedNODE__,
+                            model.total_of_NODEs_on_firstBoundaryLine__, model.num_of_firstNODE__,
+                            (s) => sb.AppendLine(s));
+                    sb.AppendLine("end--------------------------------");
+                });
+                return sb.ToString();
             };
 
             Post["/IMEmSzTransMesh2", true] = async (_, t) =>
@@ -162,9 +232,9 @@ namespace MDM.Controller
                             model.P, model.DI1, model.D1, model.SCL, model.Q1,
                             model.NK1, model.BK1, model.Kfes, model.SSlotType, model.BS0,
                             model.BS1, model.BS2, model.HS0, model.HS1, model.HS2,
-                            model.swlay, model.Z1, model.A1S, model.B1S, model.N1,
-                            model.CLZ1, model.OrdeMax, model.Ordefr0, model.Freqfr0, model.Amplfr0,
-                            model.FlagCal,
+                            model.swlay, model.Z1, model.SCoilType, model.N1, model.Dsci,
+                            model.A1S, model.B1S, model.CLZ1,
+                            model.OrdeMax, model.Ordefr0, model.Freqfr0, model.Amplfr0, model.FlagCal,
                             (s) => sb.AppendLine(s));
                     sb.AppendLine("end--------------------------------");
                 });
@@ -173,11 +243,31 @@ namespace MDM.Controller
 
             Post["/IMMeSzStatorCal2", true] = async (_, t) =>
             {
-                //double[] a = 0,b=[];
-                // await Task.Run(() => IMMeSzStatorCalMain(
-                //     "",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,ref a,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,ref b
-                //   , CallbackFun));
-                return 200;
+                var model = this.Bind<IMMeSzStatorCal2Model>();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(model.user);
+                sb.AppendLine(model.project);
+                sb.AppendLine(model.design);
+                sb.AppendLine(model.timestamp.ToString());
+                await Task.Run(() =>
+                {
+                    sb.AppendLine("begin------------------------------");
+                    IMMeSzStatorCalMain(
+                            "", model.D1, model.DI1, model.SCL, model.Q1, model.Kfes,
+                            model.SSlotType, model.HS0, model.HS1, model.HS2,
+                            model.BS0, model.BS1, model.BS2, model.NK1, model.BK1,
+                            model.swlay, model.Z1, model.SCoilType, model.Dsci, model.A1S, model.B1S, model.N1,
+                            model.SWireCol, model.DETAG1, model.dSConductor, model.dSCoil,
+                            model.dSLiner, model.dSLiner2, model.dSWedgeDw, model.dSLineBot,
+                            model.MechCalCont, model.MechStrucSCore, model.MechStrucSWinding,
+                            model.MechStrucSFrame, model.SCSegNum, model.Lsss, model.STCElemNum,
+                            model.MASSw, model.ModeMax, model.FreqMin, model.FreqMax,
+                            model.AngleF1stdot, model.FrameEX, model.FramePRXY, model.FrameDENS,
+                            model.FrameSSIZE, model.FrameESIZE, model.FlagSCoreFrame, model.DeltFC,
+                            model.Lsca, model.NumFixDot, model.FixDotXYZR, (s) => sb.AppendLine(s));
+                    sb.AppendLine("end--------------------------------");
+                });
+                return sb.ToString();
             };
 
             Post["/IMPredictFr2", true] = async (_, t) =>
@@ -256,7 +346,7 @@ namespace MDM.Controller
                 int JC_, int swlay_, int A1_, int Y1_, int Z1_,
                 double CLZ1_, double Srv_, int SCoilType_, double Dsci_,
                 double A1S_, double B1S_, int N1_, double AA1_, double LL_,
-                int Flag_SPhaseSequ_, int clockwise_stator_, int SCShape_, int SWCType_, double SWCFinArray_,
+                int Flag_SPhaseSequ_, int clockwise_stator_, int SCShape_, int SWCType_, double[,] SWCFinArray_,
                 double DO2_, double DI2_, double RCL_, int Q2_, int NK2_,
                 double BK2_, double BSK_, double Kfer_, int IKRR_, int RSlotType_,
                 double BR0_, double BR1_, double BR2_, double BR3_, double BR4_,
@@ -319,7 +409,7 @@ namespace MDM.Controller
                 int[] NodeNum_of_GapInner__, int[] NodeNum_of_GapOuter__, int[] ipoint__, int[] jpoint__, int[] kpoint__,
                 double[] area_of_ELEMENT__, int[] MatNumber__, int[] ElemTypeNumber__, double[] x_pos__, double[] y_pos__,
                 int total_of_rotatedNODEs__, int[] num_of_rotatedNODE__,
-                int[] total_of_NODEs_on_firstBoundaryLine__, int[] num_of_firstNODE__);
+                int[] total_of_NODEs_on_firstBoundaryLine__, int[] num_of_firstNODE__, Callback cb);
 
         [DllImport("../DLL/IMEmSzTransMesh2.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, EntryPoint = "IMEmSzTransMeshMain")]
         public static extern void IMEmSzTransMeshMain(
@@ -343,9 +433,9 @@ namespace MDM.Controller
                 int P, double DI1, double D1, double SCL, int Q1,
                 int NK1, double BK1, double Kfes, int SSlotType, double BS0,
                 double BS1, double BS2, double HS0, double HS1, double HS2,
-                int swlay, int Z1, double A1S, double B1S, int N1,
-                double CLZ1, int OrdeMax, int Ordefr0, double Freqfr0, double Amplfr0,
-                int FlagCal, Callback cb);
+                int swlay, int Z1, int SCoilType, int N1, double Dsci,
+                double A1S, double B1S, double CLZ1,
+                int OrdeMax, int Ordefr0, double Freqfr0, double Amplfr0, int FlagCal, Callback cb);
 
         [DllImport("../DLL/IMMeSzStatorCal2.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, EntryPoint = "IMMeSzStatorCalMain")]
         public static extern void IMMeSzStatorCalMain(
@@ -360,7 +450,7 @@ namespace MDM.Controller
                 double MASSw, int ModeMax, double FreqMin, double FreqMax,
                 double AngleF1stdot, double FrameEX, double FramePRXY, double FrameDENS,
                 int FrameSSIZE, double FrameESIZE, int FlagSCoreFrame, double DeltFC,
-                double Lsca, int NumFixDot, double[] FixDotXYZR, Callback cb);
+                double Lsca, int NumFixDot, double[,] FixDotXYZR, Callback cb);
 
         [DllImport("../DLL/IMPredictFr2.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, EntryPoint = "IMPredictFrMainCal")]
         public static extern void IMPredictFrMainCal(
